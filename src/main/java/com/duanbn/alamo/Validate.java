@@ -75,7 +75,7 @@ public class Validate {
 	 */
 	public static void check(Object pojo, String... ignoreFields) {
 		StringBuilder errorInfo = new StringBuilder();
-		_check(pojo, 0, errorInfo, null, ignoreFields);
+		_checkByAnno(pojo, 0, errorInfo, null, ignoreFields);
 		if (StringUtils.isNotBlank(errorInfo.toString())) {
 			throw new CheckFailureException(errorInfo.toString().trim());
 		}
@@ -99,14 +99,14 @@ public class Validate {
 	 */
 	public static void check(Object pojo, ICheckFailHandler handler, String... ignoreFields) {
 		StringBuilder errorInfo = new StringBuilder();
-		_check(pojo, 0, errorInfo, handler, ignoreFields);
+		_checkByAnno(pojo, 0, errorInfo, handler, ignoreFields);
 		if (StringUtils.isNotBlank(errorInfo.toString())) {
 			throw new CheckFailureException(errorInfo.toString().trim());
 		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void _check(Object pojo, int level, StringBuilder errorInfo, ICheckFailHandler handler,
+	private static void _checkByAnno(Object pojo, int level, StringBuilder errorInfo, ICheckFailHandler handler,
 			String... ignoreFields) {
 		if (level > MAX_CHECKLEVEL) {
 			throw new DefineRuleException("校验深度超过指定阈值.");
@@ -199,7 +199,7 @@ public class Validate {
 						validator.check(fvalue, cacheKey.toString(), anno);
 					} else if (annoClass == CheckObject.class) {
 						level++;
-						_check(fvalue, level, errorInfo, handler);
+						_checkByAnno(fvalue, level, errorInfo, handler);
 						level--;
 					} else {
 						throw new DefineRuleException("不被支持的变量值类型 " + field.getType());
