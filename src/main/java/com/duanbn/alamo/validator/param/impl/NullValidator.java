@@ -1,4 +1,4 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.param.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.duanbn.alamo.Validate;
 import com.duanbn.alamo.annotation.CheckIsNull;
 import com.duanbn.alamo.exception.NullException;
 import com.duanbn.alamo.validator.IAnnotationValidator;
-import com.duanbn.alamo.validator.ParamValidator;
+import com.duanbn.alamo.validator.param.ParamValidator;
 
 /**
  * 校验参数值是否为null. 如果是字符串则判断是否为空串.

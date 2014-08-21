@@ -5,7 +5,7 @@ import org.junit.Test;
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.Validate;
-import com.duanbn.alamo.validator.impl.MobileValidator;
+import com.duanbn.alamo.validator.noparam.impl.MobileValidator;
 
 public class ValidateTest {
 

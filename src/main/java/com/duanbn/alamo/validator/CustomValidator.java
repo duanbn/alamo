@@ -1,6 +1,6 @@
 package com.duanbn.alamo.validator;
 
-import com.duanbn.alamo.exception.CheckErrorException;
+import com.duanbn.alamo.exception.custom.CheckErrorException;
 
 /**
  * 用户自定义校验器接口.

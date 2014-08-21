@@ -1,12 +1,12 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.param.impl;
 
 import java.util.List;
 
 import com.duanbn.alamo.Range;
 import com.duanbn.alamo.StringUtils;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.LengthErrorException;
-import com.duanbn.alamo.validator.ParamValidator;
+import com.duanbn.alamo.validator.param.ParamValidator;
 
 /**
  * 长度校验器. 校验变量的长度, 如果变量是字符类型，则校验字符串的长度,如果变量是数值类型，则校验数值的位数.
@@ -28,7 +28,7 @@ public class LengthValidator extends ParamValidator<Range> {
         }
 
         if (length == -1) {
-            throw new DefineRuleException("获取" + cname + "长度失败");
+            throw new CheckFailureException("获取" + cname + "长度失败");
         }
 
         for (Range range : params) {

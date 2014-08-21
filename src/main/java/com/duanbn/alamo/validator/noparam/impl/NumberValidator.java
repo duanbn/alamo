@@ -1,13 +1,13 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
 import com.duanbn.alamo.annotation.CheckNumber;
-import com.duanbn.alamo.exception.TypeErrorException;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.validator.IAnnotationValidator;
-import com.duanbn.alamo.validator.NoParamValidator;
+import com.duanbn.alamo.validator.noparam.NoParamValidator;
 
 /**
  * 数字类型校验器.
@@ -22,9 +22,9 @@ public class NumberValidator extends NoParamValidator implements IAnnotationVali
     public void check(Object value, String cname, String message) {
         if (!(value instanceof Number)) {
             if (StringUtils.isNotBlank(message)) {
-                throw new TypeErrorException(message);
+                throw new CheckFailureException(message);
             } else {
-                throw new TypeErrorException(cname + "不是数字");
+                throw new CheckFailureException(cname + "不是数字");
             }
         }
     }

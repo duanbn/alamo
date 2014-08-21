@@ -2,6 +2,7 @@ package com.duanbn.alamo.validator;
 
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.exception.TypeErrorException;
+import com.duanbn.alamo.validator.noparam.NoParamValidator;
 
 /**
  * 字符串类型基础校验器.

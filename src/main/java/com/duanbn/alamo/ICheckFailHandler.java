@@ -1,7 +1,7 @@
 package com.duanbn.alamo;
 
 import com.duanbn.alamo.exception.CheckFailureException;
-import com.duanbn.alamo.exception.CustomErrorException;
+import com.duanbn.alamo.exception.custom.CustomErrorException;
 
 /**
  * 校验失败处理器.

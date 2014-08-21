@@ -1,9 +1,10 @@
-package com.duanbn.alamo.validator;
+package com.duanbn.alamo.validator.noparam;
 
 import java.util.*;
 import java.util.concurrent.*;
 
 import com.duanbn.alamo.Rule;
+import com.duanbn.alamo.validator.IValidator;
 
 /**
  * 无参校验器.

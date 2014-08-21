@@ -1,11 +1,11 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
 import com.duanbn.alamo.annotation.CheckString;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
 
@@ -26,7 +26,7 @@ public class StringValidator extends AbstractStringValidator implements IAnnotat
     public void check(Object value, String cacheKey, CheckString anno) {
         if (anno.isNull()) {
             if (!(value instanceof String)) {
-                throw new DefineRuleException(anno.cname() + " 必须是字符串");
+                throw new CheckFailureException(anno.cname() + " 必须是字符串");
             }
             if (StringUtils.isBlank((String) value)) {
                 return;

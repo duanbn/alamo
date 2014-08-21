@@ -11,10 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.duanbn.alamo.exception.DefineRuleException;
-import com.duanbn.alamo.validator.impl.EnumValidator;
-import com.duanbn.alamo.validator.impl.LengthValidator;
-import com.duanbn.alamo.validator.impl.NullValidator;
-import com.duanbn.alamo.validator.impl.RangeValidator;
+import com.duanbn.alamo.validator.param.impl.EnumValidator;
+import com.duanbn.alamo.validator.param.impl.LengthValidator;
+import com.duanbn.alamo.validator.param.impl.NullValidator;
+import com.duanbn.alamo.validator.param.impl.RangeValidator;
 
 public class ValidateUtil {
 

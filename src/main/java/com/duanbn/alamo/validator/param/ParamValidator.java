@@ -1,10 +1,11 @@
-package com.duanbn.alamo.validator;
+package com.duanbn.alamo.validator.param;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.duanbn.alamo.Rule;
+import com.duanbn.alamo.validator.IValidator;
 
 /**
  * 带参校验器.

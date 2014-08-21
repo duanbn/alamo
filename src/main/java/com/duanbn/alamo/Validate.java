@@ -15,17 +15,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.duanbn.alamo.annotation.CheckObject;
 import com.duanbn.alamo.annotation.CheckPOJO;
 import com.duanbn.alamo.annotation.CustomCheck;
-import com.duanbn.alamo.exception.CheckErrorException;
 import com.duanbn.alamo.exception.CheckFailureException;
-import com.duanbn.alamo.exception.CustomErrorException;
 import com.duanbn.alamo.exception.DefineRuleException;
 import com.duanbn.alamo.exception.NullException;
+import com.duanbn.alamo.exception.custom.CheckErrorException;
+import com.duanbn.alamo.exception.custom.CustomErrorException;
 import com.duanbn.alamo.validator.CustomValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
 import com.duanbn.alamo.validator.IValidator;
-import com.duanbn.alamo.validator.NoParamValidator;
-import com.duanbn.alamo.validator.ParamValidator;
-import com.duanbn.alamo.validator.impl.NullValidator;
+import com.duanbn.alamo.validator.noparam.NoParamValidator;
+import com.duanbn.alamo.validator.param.ParamValidator;
+import com.duanbn.alamo.validator.param.impl.NullValidator;
 
 /**
  * 校验工具类. 校验工具类对外提供的门面类，通过此类触发校验动作. 使用方法如下:<br/>

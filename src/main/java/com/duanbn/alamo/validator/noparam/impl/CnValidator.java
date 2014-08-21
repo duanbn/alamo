@@ -1,11 +1,11 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
 import com.duanbn.alamo.annotation.CheckCn;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.TypeErrorException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
@@ -22,9 +22,9 @@ public class CnValidator extends AbstractStringValidator implements IAnnotationV
     public void checkContent(String value, String cname, String message) {
         if (!isChinese(value)) {
             if (StringUtils.isNotBlank(message)) {
-                throw new TypeErrorException(message);
+                throw new CheckFailureException(message);
             } else {
-                throw new TypeErrorException(cname + "不是中文");
+                throw new CheckFailureException(cname + "不是中文");
             }
         }
     }
@@ -32,7 +32,7 @@ public class CnValidator extends AbstractStringValidator implements IAnnotationV
     public void check(Object value, String cacheKey, CheckCn anno) {
         if (anno.isNull()) {
             if (!(value instanceof String)) {
-                throw new DefineRuleException(anno.cname() + " 必须是字符串");
+                throw new TypeErrorException(anno.cname() + " 必须是字符串");
             }
             if (StringUtils.isBlank((String) value)) {
                 return;

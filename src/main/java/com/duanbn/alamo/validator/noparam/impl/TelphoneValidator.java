@@ -1,39 +1,39 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
-import com.duanbn.alamo.annotation.CheckIP;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.annotation.CheckTelphone;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.TypeErrorException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
 
 /**
- * IP校验器.
- * 校验变量值是否符合IP格式.
+ * 电话号码号码校验器.
+ * 校验字符串格式是否符合电话号码格式. 及支持手机也支持座机.
  *
  * @author duanbn
  * @since 1.0.0
  */
-public class IPValidator extends AbstractStringValidator implements IAnnotationValidator<CheckIP> {
+public class TelphoneValidator extends AbstractStringValidator implements IAnnotationValidator<CheckTelphone> {
 
     @Override
     public void checkContent(String value, String cname, String message) {
-        if (!value.matches("^(0|[1-9]\\d?|[0-1]\\d{2}|2[0-4]\\d|25[0-5]).(0|[1-9]\\d?|[0-1]\\d{2}|2[0-4]\\d|25[0-5]).(0|[1-9]\\d?|[0-1]\\d{2}|2[0-4]\\d|25[0-5]).(0|[1-9]\\d?|[0-1]\\d{2}|2[0-4]\\d|25[0-5])$")) {
+        if (!value.matches("^\\d{3}-\\d{8}|\\d{4}-\\d{7,8}|(((\\d{2,3}))|(\\d{3}-))?((1[345]\\d{9})|(18\\d{9}))$")) {
             if (StringUtils.isNotBlank(message)) {
-                throw new TypeErrorException(message);
+                throw new CheckFailureException(message);
             } else {
-                throw new TypeErrorException(cname + "不是有效的IP地址");
+                throw new CheckFailureException(cname + "不是有效的电话号码");
             }
         }
     }
 
-    public void check(Object value, String cacheKey, CheckIP anno) {
+    public void check(Object value, String cacheKey, CheckTelphone anno) {
         if (anno.isNull()) {
             if (!(value instanceof String)) {
-                throw new DefineRuleException(anno.cname() + " 必须是字符串");
+                throw new TypeErrorException(anno.cname() + " 必须是字符串");
             }
             if (StringUtils.isBlank((String) value)) {
                 return;

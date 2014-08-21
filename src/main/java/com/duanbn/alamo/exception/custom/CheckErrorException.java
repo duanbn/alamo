@@ -1,4 +1,4 @@
-package com.duanbn.alamo.exception;
+package com.duanbn.alamo.exception.custom;
 
 /**
  * 用于用户自定义校验使用.

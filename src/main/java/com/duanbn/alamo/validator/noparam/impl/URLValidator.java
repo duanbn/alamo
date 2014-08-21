@@ -1,4 +1,4 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,7 +8,7 @@ import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
 import com.duanbn.alamo.annotation.CheckURL;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.TypeErrorException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
@@ -28,9 +28,9 @@ public class URLValidator extends AbstractStringValidator implements IAnnotation
             new URL(value);
         } catch (MalformedURLException e) {
             if (StringUtils.isNotBlank(message)) {
-                throw new TypeErrorException(message);
+                throw new CheckFailureException(message);
             } else {
-                throw new TypeErrorException(cname + "不是有效的URL地址");
+                throw new CheckFailureException(cname + "不是有效的URL地址");
             }
         }
     }
@@ -38,7 +38,7 @@ public class URLValidator extends AbstractStringValidator implements IAnnotation
     public void check(Object value, String cacheKey, CheckURL anno) {
         if (anno.isNull()) {
             if (!(value instanceof String)) {
-                throw new DefineRuleException(anno.cname() + " 必须是字符串");
+                throw new TypeErrorException(anno.cname() + " 必须是字符串");
             }
             if (StringUtils.isBlank((String) value)) {
                 return;

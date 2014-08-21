@@ -1,39 +1,38 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
-import com.duanbn.alamo.annotation.CheckMobile;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.annotation.CheckZip;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.TypeErrorException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
 
 /**
- * 手机号码校验器.
- * 校验字符串格式是否符合手机号码格式.
- *
+ * 邮政编码校验器. 校验变量值是否是一个邮政编码.
+ * 
  * @author duanbn
  * @since 1.0.0
  */
-public class MobileValidator extends AbstractStringValidator implements IAnnotationValidator<CheckMobile> {
+public class ZipValidator extends AbstractStringValidator implements IAnnotationValidator<CheckZip> {
 
     @Override
     public void checkContent(String value, String cname, String message) {
-        if (!value.matches("^((\\(\\d{2,3}\\))|(\\d{3}\\-))?((1[345]\\d{9})|(18\\d{9}))$")) {
+        if (!value.matches("[1-9]\\d{5}(?!\\d)")) {
             if (StringUtils.isNotBlank(message)) {
-                throw new TypeErrorException(message);
+                throw new CheckFailureException(message);
             } else {
-                throw new TypeErrorException(cname + "不是有效的号码");
+                throw new CheckFailureException(cname + "不是有效的邮政编码");
             }
         }
     }
 
-    public void check(Object value, String cacheKey, CheckMobile anno) {
+    public void check(Object value, String cacheKey, CheckZip anno) {
         if (anno.isNull()) {
             if (!(value instanceof String)) {
-                throw new DefineRuleException(anno.cname() + " 必须是字符串");
+                throw new TypeErrorException(anno.cname() + " 必须是字符串");
             }
             if (StringUtils.isBlank((String) value)) {
                 return;
@@ -41,8 +40,8 @@ public class MobileValidator extends AbstractStringValidator implements IAnnotat
         }
 
         // ValidateUtil.checkAnnotation(value, anno);
-        Rule r = ruleCache.get(cacheKey); 
-        if (r == null) { 
+        Rule r = ruleCache.get(cacheKey);
+        if (r == null) {
             r = RuleBuilder.build();
             r.setName(anno.cname()).isNull(anno.isNull()).setEnum(anno.value()).setErrorMessage(anno.message());
             ruleCache.put(cacheKey, r);

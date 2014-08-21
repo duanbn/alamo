@@ -1,39 +1,38 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import com.duanbn.alamo.Rule;
 import com.duanbn.alamo.RuleBuilder;
 import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
-import com.duanbn.alamo.annotation.CheckEmail;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.annotation.CheckEn;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.TypeErrorException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
 
 /**
- * Email校验器. 校验变量值是否符合Email的格式.
+ * 英文校验器. 校验变量值是否是英文.
  * 
  * @author duanbn
  * @since 1.0.0
  */
-public class EmailValidator extends AbstractStringValidator implements IAnnotationValidator<CheckEmail> {
+public class EnValidator extends AbstractStringValidator implements IAnnotationValidator<CheckEn> {
 
     @Override
     public void checkContent(String value, String cname, String message) {
-        if (!value
-                .matches("[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?")) {
+        if (!value.matches("^[A-Za-z]+$")) {
             if (StringUtils.isNotBlank(message)) {
-                throw new TypeErrorException(message);
+                throw new CheckFailureException(message);
             } else {
-                throw new TypeErrorException(cname + "不是合法的Email");
+                throw new CheckFailureException(cname + "不是英文");
             }
         }
     }
 
-    public void check(Object value, String cacheKey, CheckEmail anno) {
+    public void check(Object value, String cacheKey, CheckEn anno) {
         if (anno.isNull()) {
             if (!(value instanceof String)) {
-                throw new DefineRuleException(anno.cname() + " 必须是字符串");
+                throw new TypeErrorException(anno.cname() + " 必须是字符串");
             }
             if (StringUtils.isBlank((String) value)) {
                 return;
@@ -49,7 +48,6 @@ public class EmailValidator extends AbstractStringValidator implements IAnnotati
             ruleCache.put(cacheKey, r);
         }
         Validate.check(value, r);
-        // check email
         check(value, anno.cname(), anno.message());
     }
 

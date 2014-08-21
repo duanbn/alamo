@@ -1,4 +1,4 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.noparam.impl;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -9,7 +9,6 @@ import com.duanbn.alamo.StringUtils;
 import com.duanbn.alamo.Validate;
 import com.duanbn.alamo.annotation.CheckStringNumber;
 import com.duanbn.alamo.exception.CheckFailureException;
-import com.duanbn.alamo.exception.DefineRuleException;
 import com.duanbn.alamo.exception.TypeErrorException;
 import com.duanbn.alamo.validator.AbstractStringValidator;
 import com.duanbn.alamo.validator.IAnnotationValidator;
@@ -28,9 +27,9 @@ public class StringNumberValidator extends AbstractStringValidator implements IA
 	public void checkContent(String value, String cname, String message) {
 		if (!value.matches("^[-+]?\\d*\\.?\\d*$")) {
 			if (StringUtils.isNotBlank(message)) {
-				throw new TypeErrorException(message);
+				throw new CheckFailureException(message);
 			} else {
-				throw new TypeErrorException(cname + "不是数字");
+				throw new CheckFailureException(cname + "不是数字");
 			}
 		}
 	}
@@ -44,7 +43,7 @@ public class StringNumberValidator extends AbstractStringValidator implements IA
 			}
 		}
 		if (!(value instanceof String)) {
-			throw new DefineRuleException(anno.cname() + " 必须是字符串");
+			throw new TypeErrorException(anno.cname() + " 必须是字符串");
 		}
 
 		try {

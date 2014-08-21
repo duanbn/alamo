@@ -8,12 +8,12 @@ import java.util.Map;
 
 import com.duanbn.alamo.exception.DefineRuleException;
 import com.duanbn.alamo.validator.IValidator;
-import com.duanbn.alamo.validator.NoParamValidator;
-import com.duanbn.alamo.validator.impl.EnumValidator;
-import com.duanbn.alamo.validator.impl.LengthValidator;
-import com.duanbn.alamo.validator.impl.NullValidator;
-import com.duanbn.alamo.validator.impl.RangeValidator;
-import com.duanbn.alamo.validator.impl.RegexValidator;
+import com.duanbn.alamo.validator.noparam.NoParamValidator;
+import com.duanbn.alamo.validator.param.impl.EnumValidator;
+import com.duanbn.alamo.validator.param.impl.LengthValidator;
+import com.duanbn.alamo.validator.param.impl.NullValidator;
+import com.duanbn.alamo.validator.param.impl.RangeValidator;
+import com.duanbn.alamo.validator.param.impl.RegexValidator;
 
 /**
  * 验证规则.

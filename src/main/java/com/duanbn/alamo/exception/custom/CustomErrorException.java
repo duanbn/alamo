@@ -1,4 +1,6 @@
-package com.duanbn.alamo.exception;
+package com.duanbn.alamo.exception.custom;
+
+import com.duanbn.alamo.exception.CheckFailureException;
 
 /**
  * 运行时异常.

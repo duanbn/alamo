@@ -1,4 +1,4 @@
-package com.duanbn.alamo.validator.impl;
+package com.duanbn.alamo.validator.param.impl;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -6,9 +6,9 @@ import java.util.List;
 
 import com.duanbn.alamo.Range;
 import com.duanbn.alamo.StringUtils;
-import com.duanbn.alamo.exception.DefineRuleException;
+import com.duanbn.alamo.exception.CheckFailureException;
 import com.duanbn.alamo.exception.RangeErrorException;
-import com.duanbn.alamo.validator.ParamValidator;
+import com.duanbn.alamo.validator.param.ParamValidator;
 
 /**
  * 数值范围校验器. 校验一个数值的值是否在一个指定的范围中. <b>范围校验只支持连续区间的校验，例：大于2并且小于4，
@@ -28,14 +28,14 @@ public class RangeValidator extends ParamValidator<Range> {
 			try {
 				n = numberFormat.parse((String) value);
 			} catch (ParseException e) {
-				throw new DefineRuleException("范围校验的被校验值必须是数字或者数字字符串");
+				throw new CheckFailureException("范围校验的被校验值必须是数字或者数字字符串");
 			} catch (NumberFormatException e) {
-				throw new DefineRuleException("范围校验的被校验值必须是数字或者数字字符串");
+				throw new CheckFailureException("范围校验的被校验值必须是数字或者数字字符串");
 			}
 		} else if (value instanceof Number) {
 			n = (Number) value;
 		} else {
-			throw new DefineRuleException("范围校验的被校验值必须是数字");
+			throw new CheckFailureException("范围校验的被校验值必须是数字");
 		}
 
 		for (Range range : params) {
